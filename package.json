@@ -83,13 +83,13 @@
     "@deepfocus/get-windows": "^1.0.21",
     "child_process": "^1.0.2",
     "electron-is-dev": "^3.0.1",
-    "electron-store": "^10.0.1",
+    "electron-store": "^11.0.2",
     "electron-updater": "^6.6.2",
     "howler": "^2.2.4",
     "store": "^2.0.12"
   },
   "devDependencies": {
-    "electron": "^36.2.1",
-    "electron-builder": "~24.13.3"
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
   }
 }
