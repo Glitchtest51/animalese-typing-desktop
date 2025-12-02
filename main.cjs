@@ -1,24 +1,23 @@
-import { app, powerMonitor, Tray, BrowserWindow, Menu, ipcMain } from 'electron';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import Store from 'electron-store';
-import isDev from 'electron-is-dev';
-import { spawn } from 'child_process';
-import pkg from 'electron-updater'; const { autoUpdater } = pkg;
+const { app, powerMonitor, Tray, BrowserWindow, Menu, ipcMain } = require('electron');
+const path = require('path');
+const Store = require('electron-store').default;
+const isDev = require('electron-is-dev');
+const { spawn } = require('child_process');
+const { autoUpdater } = require('electron-updater');
 
 // Conditionally import get-windows (not supported on Linux)
 let getFocusedWindow = null;
 if (process.platform !== 'linux') {
     try {
-        const getWindowsPkg = await import('@deepfocus/get-windows');
+        const getWindowsPkg = require('@deepfocus/get-windows');
         getFocusedWindow = getWindowsPkg.activeWindow;
     } catch (error) {
         console.warn('Window monitoring not available:', error.message);
     }
 }
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const SYSTRAY_ICON = (process.platform === 'darwin') ? path.join(__dirname, '/assets/images/icon_18x18.png') : path.join(__dirname, '/assets/images/icon.png');
 const SYSTRAY_ICON_OFF = (process.platform === 'darwin') ? path.join(__dirname, '/assets/images/icon_off_18x18.png') : path.join(__dirname, '/assets/images/icon_off.png');
@@ -394,4 +393,4 @@ app.on('quit', () => {
     app.exit(0);
 });
 
-export default app;
+module.exports = app;
