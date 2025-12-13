@@ -3,7 +3,18 @@ const path = require('path');
 const Store = require('electron-store').default;
 const isDev = require('electron-is-dev');
 const { spawn } = require('child_process');
+const fs = require('fs');
 const { autoUpdater } = require('electron-updater');
+
+function computeResourcesRoot(p) {
+    if (!p) return p || '';
+    const parts = p.split(path.sep).filter(Boolean);
+    const resIdx = parts.lastIndexOf('resources');
+    if (resIdx >= 0) return path.sep + parts.slice(0, resIdx + 1).join(path.sep);
+    const asarIdx = parts.lastIndexOf('app.asar');
+    if (asarIdx >= 0) return path.sep + parts.slice(0, asarIdx).join(path.sep) + path.sep + 'resources';
+    return p;
+}
 
 // Conditionally import get-windows (not supported on Linux)
 let getFocusedWindow = null;
@@ -297,18 +308,24 @@ async function startKeyListener() {
             : path.join(process.resourcesPath, 'animalese-listener.exe');
     } else if (platform === 'darwin') {
         listenerPath = isDev
-            ? path.join(__dirname, 'libs', 'key-listeners', 'swift-key-listener')
-            : path.join(process.resourcesPath, 'swift-key-listener');
+            ? path.join(__dirname, 'libs', 'key-listeners', 'animalese-listener')
+            : path.join(process.resourcesPath, 'animalese-listener');
     } else if (platform === 'linux') {
         listenerPath = isDev
-            ? path.join(__dirname, 'libs', 'key-listeners', 'linux-key-listener.cjs')
-            : path.join(process.resourcesPath, 'linux-key-listener.cjs');
+            ? path.join(__dirname, 'libs', 'key-listeners', 'animalese-listener')
+            : `${process.resourcesPath}/animalese-listener`;// TODO: fix path for linux packaged app
     } else {
-        console.error('Unsupported platform');
+        console.error('Unsupported platform'); return;
+    }
+    try {
+        if (fs.existsSync(listenerPath) && fs.statSync(listenerPath).isFile()) console.log('Starting key listener');
+    } catch (err) {
+        console.error('ERROR: key listener not found at:', listenerPath);
         return;
     }
 
-    keyListener = spawn(listenerPath);
+    //if (!keyListener) return;
+    keyListener = spawn(`${process.resourcesPath}/animalese-listener`);
     keyListener.stdout.on('data', data => {
         const lines = data.toString().split('\n').filter(Boolean);
 
@@ -333,7 +350,13 @@ async function startKeyListener() {
         }
     });
     keyListener.stderr.on('data', data => {
-        console.error(`${platform} error:`, data.toString());
+        console.log(`${platform}-listener:`, data.toString());
+    });
+    keyListener.on('error', (err) => {
+        console.error('keyListener spawn error:', err && err.message ? err.message : err);
+    });
+    keyListener.on('exit', (code, signal) => {
+        console.error('keyListener exited:', code, signal);
     });
 }
 //#endregion

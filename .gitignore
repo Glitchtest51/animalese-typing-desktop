@@ -7,8 +7,8 @@ gist
 .vscode
 /exports
 venv
-swift-key-listener
-swift-key-listener-arm64
-swift-key-listener-x64
+animalese-listener
+animalese-listener-arm64
+animalese-listenerx64
 animalese-listener.exe
 /.idea

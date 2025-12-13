@@ -3,7 +3,18 @@ const os = require('os');
 const { execSync } = require('child_process');
 const { ipcRenderer } = require('electron');
 
-const capsLockKeycode = (process.platform === 'darwin') ? 57 : 20;
+const capsLockKeycode = (() => {
+    switch (os.platform()) {
+        case 'win32':
+            return 20;
+        case 'darwin':
+            return 57;
+        case 'linux':
+            return 66;
+        default:
+            throw new Error(`Unsupported platform: ${os.platform()}`);
+    }
+})();
 capsActive = getInitialCapsState();
 
 function initCapsLockState() {
