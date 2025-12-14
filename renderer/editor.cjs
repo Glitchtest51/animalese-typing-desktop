@@ -318,7 +318,8 @@ window.api.onRemapSound((remapSound) => {
     const { keycode, isCtrlDown, isAltDown, isShiftDown, finalSound, defaultSound } = currentKey;
     const reset = remapSound === defaultSound;// if the key is being mapped to it's default sound, reset and clear the mapping in settings
 
-    console.log("reset:", reset, "remapSound:", remapSound, "defaultSound:", defaultSound)
+    document.querySelector('.highlighted')?.classList.remove('highlighted');
+    document.querySelector(`[sound="${remapSound===''?'#no_sound':remapSound}"]`)?.classList.add('highlighted');
 
     const remappedKeys = new Map(Object.entries(preferences.get('remapped_keys')));
     const mapping = { ...remappedKeys.get(`${keycode}`) || {} };
@@ -328,13 +329,10 @@ window.api.onRemapSound((remapSound) => {
 
     if (Object.keys(mapping).length === 0) remappedKeys.delete(`${keycode}`);
     else remappedKeys.set(`${keycode}`, mapping);
-    
-    document.querySelector('.highlighted')?.classList.remove('highlighted');
-    document.querySelector(`[sound="${remapSound}"]`)?.classList.add('highlighted');
 
     preferences.set('remapped_keys', Object.fromEntries(remappedKeys));
 
-    changeTab(!remapSound||remapSound===''?0:remapSound.startsWith('&')?1:remapSound.startsWith('%')?2:remapSound.startsWith('sfx')?3:0);
+    changeTab(!remapSound||remapSound.startsWith('#')?0:remapSound.startsWith('&')?1:remapSound.startsWith('%')?2:remapSound.startsWith('sfx')?3:0);
 });
 
 remapIn.addEventListener('focusin', e => remapMonitor.setAttribute('monitoring', true));
@@ -343,12 +341,20 @@ remapIn.addEventListener('selectstart', e => e.preventDefault());
 remapIn.addEventListener('mousedown', e => e.preventDefault());
 document.addEventListener('keydown', e => { if(isRemapping) e.preventDefault(); });
 function remapStart() {
+    const { key, isShiftDown, isCtrlDown, isAltDown, finalSound } = currentKey;
+    
+    document.querySelector('.highlighted')?.classList.remove('highlighted');
+    changeTab(!finalSound||finalSound.startsWith('#')?0:finalSound.startsWith('&')?1:finalSound.startsWith('%')?2:finalSound.startsWith('sfx')?3:0);
+
+    const highlightedBtn = document.querySelector(`[sound="${finalSound===''?'#no_sound':finalSound}"]`);
+    highlightedBtn?.classList.add('highlighted');
+    highlightedBtn?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
     isRemapping = true;
     remapAcceptBtn.setAttribute('disabled', false);
     remapResetBtn.setAttribute('disabled', false);
     remapMonitor.classList.add('remapping');
     
-    const { key, isShiftDown, isCtrlDown, isAltDown, finalSound } = currentKey;
 
     let keyLabel = key;
     if (["Ctrl", "Alt", "Shift"].includes(key)) keyLabel = key;
@@ -357,12 +363,7 @@ function remapStart() {
     else if (isShiftDown) keyLabel = `Shift + ${key}`;
     remapMonitor.innerHTML = keyLabel.toUpperCase();
 
-    document.querySelector('.highlighted')?.classList.remove('highlighted');
-    changeTab(!finalSound||finalSound===''?0:finalSound.startsWith('&')?1:finalSound.startsWith('%')?2:finalSound.startsWith('sfx')?3:0);
-
-    const highlightedBtn = document.querySelector(`[sound="${finalSound}"]`);
-    highlightedBtn?.classList.add('highlighted');
-    highlightedBtn?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    console.log("Final sound:", finalSound);
 }
 
 function changeTab(newTabIndex = 1) {
@@ -392,7 +393,20 @@ function changeTab(newTabIndex = 1) {
 
 
 //#region Remap controllers
-const noneLayout = []
+const specialLayout = [
+    [
+        {label:'Nothing', btnType:'l', sound:`#no_sound`}
+    ],
+    [
+        {label:'Audio Toggle', btnType:'l', sound:`#1`}
+    ],
+    [
+        {label:'N/A', btnType:'l', sound:`#2`}
+    ],
+    [
+        {label:'N/A', btnType:'l', sound:`#3`}
+    ]
+]
 
 const voiceLayout = [
     [
@@ -535,7 +549,7 @@ customElements.define('key-button', class extends HTMLElement {
         const btnType =this.getAttribute('btn-type') ?? 's';
         const label = this.getAttribute('label');
         const svgIcon = this.getAttribute('icon');
-        this.id = `key-${label}`
+        this.id = `key-${label.replace(/\s+/g, '_')}`
         this.data = {
             label: label ?? '',
             sound: this.getAttribute('sound') ?? 'sfx.default'
@@ -573,15 +587,15 @@ customElements.define('key-button', class extends HTMLElement {
 customElements.define('key-board', class extends HTMLElement {
     connectedCallback() {
         const layoutType = this.getAttribute('layout-type');
-        const layout = layoutType==="voice"?voiceLayout:layoutType==="sfx"?sfxLayout:noneLayout
+        const layout = layoutType==="voice"?voiceLayout:layoutType==="sfx"?sfxLayout:specialLayout
 
         for (let row of layout){
         const _row = $( `<div class='key-row'></div>`);
             for (let key of row) {
-                const label = key.label?`label=${key.label}`:'';
-                const sound = key.sound?`sound=${key.sound}`:'';
-                const btnType = key.btnType?`btn-type=${key.btnType}`:'';
-                const icon = key.icon?`icon=${key.icon}`:'';
+                const label = key.label?`label="${key.label}"`:'';
+                const sound = key.sound?`sound="${key.sound}"`:'';
+                const btnType = key.btnType?`btn-type="${key.btnType}"`:'';
+                const icon = key.icon?`icon="${key.icon}"`:'';
                 const _key = $(
                     key.label?`<key-button ${label} ${sound} ${btnType} ${icon} style="--label-length: ${key.label?.length};"></key-button>`:
                     `<div class='key_blank'></div>`

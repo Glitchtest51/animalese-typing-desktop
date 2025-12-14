@@ -14,11 +14,11 @@ function getKeyInfo(e) {// parse keyInfo from keyup/down event
     const defaultKey = defaultKeyMap[e.keycode]
     if (defaultKey === undefined) return;
 
-    const { sound = defaultKey.sound, shiftSound = defaultKey.shiftSound ?? defaultKey.sound, ctrlSound = defaultKey.ctrlSound, altSound = defaultKey.altSound} = remappedKey || {};
+    const { sound = defaultKey.sound, shiftSound = defaultKey.shiftSound, ctrlSound = defaultKey.ctrlSound, altSound = defaultKey.altSound} = remappedKey || {};
     const { shiftKey, ctrlKey, altKey } = e;
     
     const finalSound = ctrlKey ? ctrlSound : altKey ? altSound : shiftKey ? shiftSound : sound;
-    const defaultSound = ctrlKey ? defaultKey.ctrlSound : altKey ? defaultKey.altSound : shiftKey ? defaultKey.shiftSound ?? defaultKey.sound : defaultKey.sound;
+    const defaultSound = ctrlKey ? defaultKey.ctrlSound : altKey ? defaultKey.altSound : shiftKey ? defaultKey.shiftSound : defaultKey.sound;
 
     return {
         keycode: e.keycode,

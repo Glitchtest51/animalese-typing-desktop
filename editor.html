@@ -134,7 +134,7 @@ author: joshxviii
 
             <div id="top_row">
                 <div id="remap_controllers">
-                    <div class="remap_controller" show="false" ><h3 style="color: #95846d7d;text-align: center;margin-block: 70px;"></h3></div>
+                    <key-board layout-type="special" class="remap_controller" show="false"></key-board>
                     <key-board layout-type="voice" class="remap_controller" show="true"></key-board>
                     <piano-board class="remap_controller" show="false"></piano-board>
                     <key-board layout-type="sfx" class="remap_controller" show="false"></key-board>
@@ -155,7 +155,7 @@ author: joshxviii
 
 
                     <div id="remap_tabs">
-                        <svg-button class="remap_tab" onmousedown="changeTab(0);window.api.sendRemapSound('');window.audio.play('sfx.default', { static: true, channel: 2, volume: 0.55 });" icon="close" title="No Sound" pressed="false"></svg-button>
+                        <svg-button class="remap_tab" onmousedown="changeTab(0);window.audio.play('sfx.default', { static: true, channel: 2, volume: 0.55 });" icon="config" title="Special Functions" pressed="false"></svg-button>
                         <svg-button class="remap_tab" onmousedown="changeTab(1);window.audio.play('sfx.default', { static: true, channel: 2, volume: 0.55 });" icon="speech" title="Speech" pressed="true"></svg-button>
                         <svg-button class="remap_tab" onmousedown="changeTab(2);window.audio.play('sfx.default', { static: true, channel: 2, volume: 0.55 });" icon="note" title="Notes" pressed="false"></svg-button>
                         <svg-button class="remap_tab" onmousedown="changeTab(3);window.audio.play('sfx.default', { static: true, channel: 2, volume: 0.55 });" icon="sfx" title="Sound Effects" pressed="false"></svg-button>

@@ -170,9 +170,11 @@ function createAudioManager() {
         if(path === '&.gwah' && mode!==3) playSound('sfx.exclamation');
         if(path === '&.deska' && mode!==3) playSound('sfx.question');
 
+        const isSpecial = path.startsWith('#');
         const isVoice = path.startsWith('&');
         const isInstrument = path.startsWith('%');
         const isSfx = path.startsWith('sfx')
+        if (isSpecial) return; // no sounds for special commands
         
         if (mode===1 && isSfx) path = 'sfx.default';
         if (mode===2 && isVoice) path = 'sfx.default';

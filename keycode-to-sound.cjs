@@ -143,9 +143,9 @@ function buildKeyMap(platform) {
     map[code] = {
       key: def.key,
       sound: def.sound ?? '',
-      shiftSound: def.shiftSound ?? undefined,
-      ctrlSound: def.ctrlSound ?? undefined,
-      altSound: def.altSound ?? undefined,
+      shiftSound: def.shiftSound ?? def.sound ?? '',
+      ctrlSound: def.ctrlSound ?? '',
+      altSound: def.altSound ?? '',
     };
   }
   return map;
