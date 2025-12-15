@@ -72,7 +72,8 @@
           "from": "assets/images/icon.png",
           "to": "icon.png"
         }
-      ]
+      ],
+      "artifactName": "AnimaleseTypingSetup.${ext}"
     },
     "linux": {
       "target": [
