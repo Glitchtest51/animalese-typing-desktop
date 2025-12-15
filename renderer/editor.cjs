@@ -159,16 +159,16 @@ function initControls() {
     });
 
     if (voiceProfile.type) {
-        if(voiceProfile.type.startsWith('m')) {
-            document.getElementById('voice_type').className = 'male'
-            document.getElementById('male').setAttribute('pressed', 'true');
-            document.getElementById('female').setAttribute('pressed', 'false');
-        }
-        else if(voiceProfile.type.startsWith('f')) {
-            document.getElementById('voice_type').className = 'female'
-            document.getElementById('female').setAttribute('pressed', 'true');
-            document.getElementById('male').setAttribute('pressed', 'false');
-        }
+        const type = voiceProfile.type.startsWith('m') ? 'male' : 'female';
+        const oppositeType = type === 'male' ? 'female' : 'male';
+
+        document.getElementById('voice_type').className = type;
+
+        document.getElementById(type).setAttribute('pressed', 'true');
+        document.getElementById(oppositeType).setAttribute('pressed', 'false');
+
+        document.querySelectorAll(`#voice_type option.${type}`).forEach(el => el.removeAttribute('disabled'));
+        document.querySelectorAll(`#voice_type option.${oppositeType}`).forEach(el => el.toggleAttribute('disabled'));
     }
 
     document.querySelectorAll('#apps_tbody tr input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
@@ -188,6 +188,10 @@ function selectVoiceType(type) {
 
     document.getElementById(type).setAttribute('pressed', 'true');
     document.getElementById(oppositeType).setAttribute('pressed', 'false');
+
+    document.querySelectorAll(`#voice_type option.${type}`).forEach(el => el.removeAttribute('disabled'));
+    document.querySelectorAll(`#voice_type option.${oppositeType}`).forEach(el => el.toggleAttribute('disabled'));
+
     voiceTypeElement.className = type;
 }
 //#endregion
@@ -415,9 +419,9 @@ function changeTab(newTabIndex = 1) {
 const specialLayout = [
     [
         {label:'Nothing', btnType:'l', sound:`#no_sound`},
-        {label:'Toggle Active', btnType:'l', sound:`#toggle_active`},
-        {label:'Show Editor ', btnType:'l', sound:`#2`},
-        {label:'N/A', btnType:'l', sound:`#3`}
+        // {label:'Toggle Active', btnType:'l', sound:`#toggle_active`},
+        // {label:'Show Editor ', btnType:'l', sound:`#2`},
+        // {label:'N/A', btnType:'l', sound:`#3`}
     ],
 ]
 
