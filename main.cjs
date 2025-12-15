@@ -19,7 +19,7 @@ if (process.platform !== 'linux') {
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
-const MUTE_HOTKEY = 'CommandOrControl+Shift+I'; // TODO make hotkey configurable from apps remapper
+const MUTE_HOTKEY = 'CommandOrControl+Shift+D'; // TODO make hotkey configurable from apps remapper
 const SYSTRAY_ICON = (process.platform === 'darwin') ? path.join(__dirname, '/assets/images/icon_18x18.png') : path.join(__dirname, '/assets/images/icon.png');
 const SYSTRAY_ICON_OFF = (process.platform === 'darwin') ? path.join(__dirname, '/assets/images/icon_off_18x18.png') : path.join(__dirname, '/assets/images/icon_off.png');
 const SYSTRAY_ICON_MUTE = (process.platform === 'darwin') ? path.join(__dirname, '/assets/images/icon_mute_18x18.png') : path.join(__dirname, '/assets/images/icon_mute.png');
