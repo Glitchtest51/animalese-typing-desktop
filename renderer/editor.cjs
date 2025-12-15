@@ -101,13 +101,16 @@ function initControls() {
             if (control==='master') preferences.set('volume', value*.01);
             else if (control.startsWith('voice')) {
                 voiceProfile[control.split('_')[1]] = value;
+                console.log(`Voice profile updated: ${control.split('_')[1]} = ${value}`, voiceProfile);
+
                 preferences.set('voice_profile', voiceProfile);
             }
             else if (control.startsWith('note')) {
                 noteProfile[control.split('_')[1]] = value;
+                console.log(`Note profile updated: ${control.split('_')[1]} = ${value}`, noteProfile);
+
                 preferences.set('note_profile', noteProfile);
             }
-
             if (updateSound && el.getAttribute('playing') !== 'true') {
                 el.setAttribute('playing', 'true');
                 setTimeout(() => {// give time for the voice settings to update before playing sound 
@@ -125,7 +128,9 @@ function initControls() {
             outputEl = document.getElementById(control + '_out');
         }
         if (isSlider) {
-            updateValue(control === 'master'?(preferences.get('volume') * 100):voiceProfile[control])
+            if (control === 'master') updateValue(preferences.get('volume') * 100)
+            else if (control.startsWith('voice')) updateValue(voiceProfile[control.split('_')[1]]);
+            else if (control.startsWith('note')) updateValue(noteProfile[control.split('_')[1]]);
             
             const step = parseFloat((el.max - el.min) * 0.05);
             el.setAttribute('tabindex', '-1');
