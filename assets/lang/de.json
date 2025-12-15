@@ -4,6 +4,12 @@
     
     "volume":"Lautstärke",
 
+    "warning.disabled":"<span style='color: var(--input-highlight-color-3);'> drücke '<span id='hotkey'></span>' zum aktivieren </span>",
+    "warning.enabled":" ",
+
+    "note.instrument":"instrument",
+    "note.transpose":"transponieren",
+
     "editor_title":"Editor",
     "voice.pitch":"tonhöhenversch.",
     "voice.intonation":"intonation",
@@ -20,6 +26,12 @@
     "m2":"Schlafmütze",
     "m3":"Arrogant",
     "m4":"Miesepeter",
+
+    "settings.theme":"thema",
+    "settings.theme.default":"standard",
+    "settings.theme.dark":"dunkel",
+    "settings.theme.pink":"rosa",
+    "settings.theme.green":"grün",
 
     "settings":"einstellungen",
     "settings.general":"allgemein",

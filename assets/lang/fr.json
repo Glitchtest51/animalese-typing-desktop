@@ -4,6 +4,12 @@
 
     "volume":"Volume",
 
+    "warning.disabled":"<span style='color: var(--input-highlight-color-3);'> appuyez sur '<span id='hotkey'></span>' pour activer </span>",
+    "warning.enabled":" ",
+
+    "note.instrument":"instrument",
+    "note.transpose":"transposer",
+
     "editor_title":"Éditeur",
     "voice.pitch":"variation hauteur",
     "voice.intonation":"intonation",
@@ -20,6 +26,12 @@
     "m2":"Paresseux",
     "m3":"Star",
     "m4":"Versatile",
+
+    "settings.theme":"thème",
+    "settings.theme.default":"défaut",
+    "settings.theme.dark":"sombre",
+    "settings.theme.pink":"rose",
+    "settings.theme.green":"vert",
 
     "settings":"paramètres",
     "settings.general":"général",

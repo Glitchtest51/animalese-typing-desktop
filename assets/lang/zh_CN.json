@@ -4,6 +4,12 @@
     
     "volume":"音量",
 
+    "warning.disabled":"<span style='color: var(--input-highlight-color-3);'> 按 '<span id='hotkey'></span>' 以启用 </span>",
+    "warning.enabled":" ",
+
+    "note.instrument":"乐器",
+    "note.transpose":"移调",
+
     "editor_title":"编辑器",
     "voice.pitch":"音调变化",
     "voice.intonation":"语调",
@@ -20,6 +26,12 @@
     "m2":"Lazy",
     "m3":"Smug",
     "m4":"Cranky",
+
+    "settings.theme":"主题",
+    "settings.theme.default":"默认",
+    "settings.theme.dark":"深色",
+    "settings.theme.pink":"粉色",
+    "settings.theme.green":"绿色",
 
     "settings":"设置",
     "settings.general":"通用",

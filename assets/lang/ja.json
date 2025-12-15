@@ -4,6 +4,12 @@
 
     "volume":"音量",
      
+    "warning.disabled":"<span style='color: var(--input-highlight-color-3);'> '<span id='hotkey'></span>' を押して有効化 </span>",
+    "warning.enabled":" ",
+
+    "note.instrument":"楽器",
+    "note.transpose":"移調",
+
     "editor_title":"編集ソフト",
     "voice.pitch":"ピッチシフト",
     "voice.intonation":"抑揚",
@@ -20,6 +26,12 @@
     "m2":"ぼんやり",
     "m3":"キザ",
     "m4":"コワイ",
+
+    "settings.theme":"テーマ",
+    "settings.theme.default":"デフォルト",
+    "settings.theme.dark":"ダーク",
+    "settings.theme.pink":"ピンク",
+    "settings.theme.green":"グリーン",
 
     "settings":"設定",
     "settings.general":"一般",
