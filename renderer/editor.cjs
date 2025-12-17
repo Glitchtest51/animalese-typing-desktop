@@ -92,9 +92,12 @@ function initControls() {
                 value = Math.min(Math.max(value, parseFloat(el.min)), parseFloat(el.max));
                 el.value = value;
                 if (outputEl) {
-                    outputEl.value = displayMode === 'percent' 
-                    ? (parseFloat(el.value)).toFixed(0) + "%" 
-                    : ((parseFloat(el.value) > 0) ? "+" : "") + parseFloat(el.value).toFixed(1);
+                    outputEl.value = (() => {
+                        switch (displayMode) {
+                        case 'percent': return (parseFloat(el.value)).toFixed(0) + "%";
+                        case 'int': return ((parseInt(el.value) > 0) ? "+" : "") + parseInt(el.value);
+                        default: return ((parseFloat(el.value) > 0) ? "+" : "") + parseFloat(el.value).toFixed(1);
+                    }})();
                 }
             } else el.value = value;
 
