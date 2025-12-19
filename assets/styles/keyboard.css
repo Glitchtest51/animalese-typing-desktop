@@ -47,7 +47,7 @@ sound-board {
     top: 46%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--accent-color);
+    color: var(--label-color);
     transition: transform 0.33s ease, font-size 0.2s ease;
 }
 
@@ -67,8 +67,8 @@ piano-key[btn-type=b] .button-label
     top: 46%;
     left: 50%;
     transform: translate(-50%, -50%);
-    fill:var(--accent-color);
-    stroke: var(--accent-color);
+    fill:var(--label-color);
+    stroke: var(--label-color);
     transition: transform 0.33s ease;
 }
 .button-row {

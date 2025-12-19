@@ -1,8 +1,10 @@
 :root {
     --drop-shadow-color: #0c0317;
+    --topbar-item-color: #ffffff;
     --main-bg-color: #16072b;
     --main-text-color: #bbbbbb;
     --secondary-bg-color: #2a1548;
+    --label-color: #716680;
     --accent-color: #d3d3d3;
     --input-bg-color: #38205b;
     --input-accent-color: #716680;

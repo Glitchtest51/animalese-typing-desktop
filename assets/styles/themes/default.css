@@ -1,10 +1,12 @@
 :root {
-    --drop-shadow-color: #d0c0a0;
-    --main-bg-color: #fffae4;
-    --main-text-color: #6e5c44;
-    --secondary-bg-color: #f8f2d7;
+    --drop-shadow-color: #f3dbc2;
+    --topbar-item-color: #947e6a;
+    --main-bg-color: #fff7e4;
+    --main-text-color: #bba280;
+    --secondary-bg-color: #fff3df;
+    --label-color: #dec1a6;
     --accent-color: #e0c49e;
-    --input-bg-color: #ece4c1;
+    --input-bg-color: #f4e5cc;
     --input-accent-color: #d1b48b;
     --input-alt-color: #f4edcf;
     --input-highlight-color: #7ee988;

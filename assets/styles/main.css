@@ -71,12 +71,14 @@ div[show=false], div[show=false] text {
     box-sizing: border-box;
 }
 .title-bar {
+    color: var(--topbar-item-color);
     width: 100%;
     height: 22px;
     max-width: 100%;
     -webkit-app-region: drag;
     z-index: 5;
-    background-color: var(--drop-shadow-color);
+    background-color: var(
+    --drop-shadow-color);
     position: absolute;
     display: flex;
     align-items: center;
@@ -94,7 +96,6 @@ div[show=false], div[show=false] text {
     background-color: var(--accent-color);
 }
 #title {
-    color: #f0feff;
 }
 
 .separator {
@@ -352,7 +353,7 @@ input:checked + .slider:before {
 }
 
 svg-button {
-    --alt1-color: var(--accent-color);
+    --alt1-color: var(--label-color);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -370,7 +371,7 @@ svg-button:active  {
 }
 
 .title-bar svg-button {
-    --alt1-color: #ffffff;
+    --alt1-color: var(--topbar-item-color);
     transform-origin: center;
     width: 24px;
     height: 24px;
